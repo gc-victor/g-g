@@ -1,0 +1,17 @@
+{
+    "name": "g-g",
+    "description": "Create repetitive code with a single command",
+    "version": "1.0.0",
+    "author": "Víctor García",
+    "main": "index.js",
+    "bin": {
+        "g-g": "./index.js"
+    },
+    "devDependencies": {
+        "prettier": "^2.2.1"
+    },
+    "dependencies": {
+        "esm": "^3.2.25",
+        "t-t": "github:gc-victor/t-t#main"
+    }
+}
