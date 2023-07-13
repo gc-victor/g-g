@@ -98,7 +98,7 @@ if (!existsSync(join(cwd, inputOption || input))) {
     );
 }
 
-const output = templateByType.output;
+const output = `${templateByType.output}/${name}`;
 
 if (!output) {
     error(
