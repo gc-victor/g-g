@@ -98,7 +98,7 @@ if (!existsSync(join(cwd, inputOption || input))) {
     );
 }
 
-const output = `${templateByType.output}/${name}`;
+const output = outputOption || templateByType.output;
 
 if (!output) {
     error(
@@ -109,7 +109,7 @@ if (!output) {
 
 generator({
     input: join(cwd, inputOption || input),
-    output: join(outputOption || output),
+    output: output,
     name,
     type
 });

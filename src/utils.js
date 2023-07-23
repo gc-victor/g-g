@@ -84,6 +84,13 @@ function templateData(name = '', type = '') {
 }
 
 function writeFilesWithContent({ input, name, type, output, fileName }) {
+    const regex = /\*$/;
+    const withFolder = regex.test(output);
+    
+    if (withFolder) {
+        output = output.replace(regex, name);
+    }
+
     const stringTemplate = readFileSync(join(input, fileName), 'utf-8');
     const content = templateEngine(stringTemplate, templateData(name, type));
     const filePath = join(output, fileName.replace(/\btemp\b/g, name));
@@ -100,8 +107,6 @@ export function generator({ input, output, name, type }) {
     if (!input) throw Error('input should not be empty');
     if (!output) throw Error('output should not be empty');
 
-    mkdirRecursive(output);
-
     if (isFile(input)) {
         return writeFilesWithContent({
             input: dirname(input),
@@ -111,6 +116,10 @@ export function generator({ input, output, name, type }) {
             fileName: basename(input)
         });
     }
+
+    output = `${output}/${name}`;
+
+    mkdirRecursive(output);
 
     return readdirSync(input).forEach((item) => {
         isFile(join(input, item))
